@@ -46,6 +46,7 @@ export default function Register() {
             <option value="authority">{t('roles.authority')}</option>
             <option value="family">{t('roles.family')}</option>
           </select>
+          <div className="alert-time" style={{ marginTop: 4 }}>Your role defines which dashboard you will see.</div>
 
           {err && <div style={{ color: 'var(--color-error)', marginTop: 8 }}>{err}</div>}
 
