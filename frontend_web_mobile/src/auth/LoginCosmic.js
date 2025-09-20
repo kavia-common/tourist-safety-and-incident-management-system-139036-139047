@@ -28,24 +28,28 @@ export default function LoginCosmic() {
     e.preventDefault();
     setErr('');
 
-    // basic validation
-    if (!/^\S+@\S+\.\S+$/.test(form.email)) {
-      setErr('Please enter a valid email address.');
+    // For demo: treat email field as username; allow non-email usernames 'user'/'admin'
+    const username = form.email.trim();
+
+    if (!username) {
+      setErr('Please enter username.');
       setTouched((t0) => ({ ...t0, email: true }));
       return;
     }
-    if (form.password.length < 6) {
-      setErr('Password must be at least 6 characters.');
+    if (!form.password) {
+      setErr('Please enter password.');
       setTouched((t0) => ({ ...t0, password: true }));
       return;
     }
 
     setLoading(true);
     try {
-      await login(form);
-      if (form.role === 'tourist') nav('/tourist');
-      if (form.role === 'authority') nav('/authority');
-      if (form.role === 'family') nav('/family');
+      // role is now determined by the AuthContext based on credentials
+      const res = await login({ email: username, password: form.password });
+      // show quick role-based navigation
+      if (res?.role === 'tourist') nav('/tourist');
+      else if (res?.role === 'authority') nav('/authority');
+      else nav('/');
     } catch (e1) {
       setErr(e1.message || 'Login failed');
     } finally {
@@ -79,26 +83,24 @@ export default function LoginCosmic() {
           <div className="cosmic-form-head">
             <h2>{t('nav.login')}</h2>
             <p className="cosmic-sub">
-              Enter your credentials and select your role. You can switch roles later from the header.
+              Demo login: Use username "user" with password "user123" for Tourist, or "admin" with "admin123" for Admin (Authority).
             </p>
           </div>
 
           <form onSubmit={submit} className="cosmic-form" noValidate>
             <div className="cosmic-field">
-              <label className="cosmic-label" htmlFor="email">{t('auth.email')}</label>
+              <label className="cosmic-label" htmlFor="email">Username</label>
               <input
                 id="email"
-                className={`cosmic-input ${emailInvalid ? 'cosmic-input--invalid' : ''}`}
-                type="email"
-                autoComplete="email"
+                className={`cosmic-input`}
+                type="text"
+                autoComplete="username"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
-                onBlur={() => setTouched((t0) => ({ ...t0, email: true }))}
                 required
-                placeholder="you@example.com"
-                aria-invalid={emailInvalid ? 'true' : 'false'}
+                placeholder='user or admin'
+                aria-invalid="false"
               />
-              {emailInvalid && <div className="cosmic-error" role="alert">Enter a valid email.</div>}
             </div>
 
             <div className="cosmic-field">
@@ -131,7 +133,7 @@ export default function LoginCosmic() {
                   <option value="authority">{t('roles.authority')}</option>
                   <option value="family">{t('roles.family')}</option>
                 </select>
-                <span className="cosmic-help">Controls your landing dashboard after login.</span>
+                <span className="cosmic-help">Demo note: Role is determined by credentials (user/user123 => Tourist, admin/admin123 => Admin).</span>
               </div>
             </div>
 

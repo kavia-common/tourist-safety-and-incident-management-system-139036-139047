@@ -36,24 +36,43 @@ export function AuthProvider({ children }) {
       if (r) localStorage.setItem('role', r); else localStorage.removeItem('role');
     },
     // PUBLIC_INTERFACE
-    // login: demo/stub implementation connected to UI
-    // Validates basic fields; sets a placeholder token and stores role for routing.
-    login: async ({ email, password, role: r }) => {
+    // login: Hardcoded demo implementation.
+    // Accepts ONLY:
+    //   1) username: 'user', password: 'user123' => role = 'tourist'
+    //   2) username: 'admin', password: 'admin123' => role = 'authority' (admin)
+    // Note: "email" field in UI is used as username for this demo. No backend call is made here.
+    login: async ({ email, password }) => {
       if (!email || !password) {
-        throw new Error('Email and password are required');
+        throw new Error('Username and password are required');
       }
-      // In real flow, call backend auth here; we simulate success with a demo token
-      const fakeToken = 'demo-token';
+
+      // Normalize input (trim)
+      const username = String(email).trim();
+      const pwd = String(password).trim();
+
+      let resolvedRole = null;
+
+      if (username === 'user' && pwd === 'user123') {
+        resolvedRole = 'tourist';
+      } else if (username === 'admin' && pwd === 'admin123') {
+        resolvedRole = 'authority';
+      } else {
+        throw new Error('Invalid credentials. Use user/user123 or admin/admin123');
+      }
+
+      // Issue a fake token and set local state
+      const fakeToken = `demo-token-${resolvedRole}`;
       localStorage.setItem('accessToken', fakeToken);
-      setUser({ email });
-      if (r) {
-        localStorage.setItem('role', r);
-        setRole(r);
-      }
-      return true;
+      localStorage.setItem('role', resolvedRole);
+      setUser({ email: username, role: resolvedRole });
+      setRole(resolvedRole);
+
+      // Return a result object so UI can show a clear distinction
+      return { ok: true, role: resolvedRole, message: resolvedRole === 'authority' ? 'Logged in as Admin (Authority)' : 'Logged in as Tourist' };
     },
     // PUBLIC_INTERFACE
     register: async ({ email, password, role: r }) => {
+      // Keep register behavior as-is (demo path). Not used for hardcoded flow.
       await Api.signup(fetchJson, { email, password, metadata: { role: r } });
       const fakeToken = 'demo-token';
       localStorage.setItem('accessToken', fakeToken);
