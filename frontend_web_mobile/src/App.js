@@ -10,6 +10,7 @@ import TouristHome from './roles/tourist/TouristHome';
 import AuthorityDashboard from './roles/authority/AuthorityDashboard';
 import FamilyHome from './roles/family/FamilyHome';
 import Login from './auth/Login';
+import LoginCosmic from './auth/LoginCosmic';
 import Register from './auth/Register';
 import SeedCard from './components/SeedCard';
 
@@ -109,8 +110,9 @@ export function AppShell() {
         <main className="main-surface">
           <Routes>
             <Route path="/" element={<LandingRedirect />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<LoginCosmic />} />
             <Route path="/register" element={<Register />} />
+            <Route path="/login-classic" element={<Login />} />
             <Route path="/tourist/*" element={<RequireRole role="tourist"><TouristHome /></RequireRole>} />
             <Route path="/authority/*" element={<RequireRole role="authority"><AuthorityDashboard /></RequireRole>} />
             <Route path="/family/*" element={<RequireRole role="family"><FamilyHome /></RequireRole>} />
