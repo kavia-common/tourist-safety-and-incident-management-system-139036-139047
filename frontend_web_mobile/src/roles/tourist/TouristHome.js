@@ -132,13 +132,16 @@ export default function TouristHome() {
       <div className="card-title">{t('tourist.safetyStatus')}</div>
       {safety ? (
         <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <div style={{ fontSize: 28, color: 'var(--color-success)' }}>●</div>
+          <div className="badge badge-safe" aria-label="Safety OK">
+            <span style={{ width: 8, height: 8, borderRadius: 999, background: 'var(--color-success)', display: 'inline-block' }} />
+            SAFE
+          </div>
           <div>
             <div>Score: <strong>{safety.score ?? 'n/a'}</strong></div>
             <div className="alert-time">Updated: {safety.updatedAt || '—'}</div>
           </div>
         </div>
-      ) : <div style={{ opacity: 0.7 }}>No score available.</div>}
+      ) : <div className="badge badge-warning" aria-live="polite">No score available</div>}
       <div style={{ display: 'flex', gap: 8, marginTop: 8 }}>
         <button className="btn btn-secondary" onClick={async () => {
           const updated = await Api.computeSafety(fetchJson, { context: 'manual-refresh' }).catch(() => null);

@@ -11,15 +11,17 @@ import AuthorityDashboard from './roles/authority/AuthorityDashboard';
 import FamilyHome from './roles/family/FamilyHome';
 import Login from './auth/Login';
 import Register from './auth/Register';
+import SeedCard from './components/SeedCard';
 
-const CosmicTheme = {
-  primary: '#4F46E5',
-  secondary: '#EC4899',
-  background: '#f9fafb',
-  surface: '#ffffff',
-  text: '#111827',
-  success: '#10B981',
-  error: '#EF4444',
+const EmergencyTheme = {
+  primary: '#0B3B60',     // deep navy
+  secondary: '#F97316',   // amber
+  background: '#0f172a',  // slate-900
+  surface: '#0b1220',     // darker panel background
+  text: '#E5E7EB',        // light text
+  success: '#16A34A',     // green
+  error: '#DC2626',       // red
+  warning: '#F59E0B',     // amber
 };
 
 // PUBLIC_INTERFACE
@@ -34,13 +36,14 @@ export function AppShell() {
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme);
     const root = document.documentElement.style;
-    root.setProperty('--color-primary', CosmicTheme.primary);
-    root.setProperty('--color-secondary', CosmicTheme.secondary);
-    root.setProperty('--color-bg', CosmicTheme.background);
-    root.setProperty('--color-surface', CosmicTheme.surface);
-    root.setProperty('--color-text', CosmicTheme.text);
-    root.setProperty('--color-success', CosmicTheme.success);
-    root.setProperty('--color-error', CosmicTheme.error);
+    root.setProperty('--color-primary', EmergencyTheme.primary);
+    root.setProperty('--color-secondary', EmergencyTheme.secondary);
+    root.setProperty('--color-bg', EmergencyTheme.background);
+    root.setProperty('--color-surface', EmergencyTheme.surface);
+    root.setProperty('--color-text', EmergencyTheme.text);
+    root.setProperty('--color-success', EmergencyTheme.success);
+    root.setProperty('--color-error', EmergencyTheme.error);
+    root.setProperty('--color-warning', EmergencyTheme.warning);
   }, [theme]);
 
   const routesByRole = useMemo(() => ({
@@ -60,7 +63,7 @@ export function AppShell() {
       <header className="topnav">
         <div className="brand">
           <span className="logo-dot" />
-          <span>Cosmic Safety</span>
+          <span>Emergency Response</span>
         </div>
         <div className="top-actions">
           <select
@@ -101,13 +104,7 @@ export function AppShell() {
               </Link>
             ))}
           </nav>
-          {!user && (
-            <div className="sidebar-card">
-              <div className="sidebar-title">{t('welcome.title')}</div>
-              <div className="sidebar-desc">{t('welcome.desc')}</div>
-              <Link to="/login" className="btn btn-primary">{t('nav.getStarted')}</Link>
-            </div>
-          )}
+          <SeedCard />
         </aside>
         <main className="main-surface">
           <Routes>
@@ -121,8 +118,8 @@ export function AppShell() {
           </Routes>
         </main>
       </div>
-      <footer className="footer">
-        <span>© {new Date().getFullYear()} Cosmic Safety</span>
+      <footer className="footer" aria-label="Footer">
+        <span>© {new Date().getFullYear()} Emergency Response Dashboard</span>
       </footer>
     </div>
   );

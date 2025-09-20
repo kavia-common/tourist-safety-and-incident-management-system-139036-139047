@@ -9,7 +9,7 @@ A modern, minimalist React app for the Smart Tourist Safety Monitoring & Inciden
 - Authority: dashboards (overview metrics), incidents feed (panic list), heatmap placeholder, AI and IoT feeds
 - Family: subscribe to alerts, linked tourists and updates
 - i18n: EN/ES/FR with easy extension
-- Theming: Cosmic Energy (primary #4F46E5, secondary #EC4899), gradients, surfaces, accessible modals
+- Theming: Emergency Response (navy/amber with critical red), high-contrast panels, accessible modals and alerts
 - Responsive layout: top nav, sidebar, cards/grids, central live map area
 - Starter API layer targeting the provided OpenAPI (auth, digital ID, safety, geofence, panic, AI, IoT, dashboard)
 

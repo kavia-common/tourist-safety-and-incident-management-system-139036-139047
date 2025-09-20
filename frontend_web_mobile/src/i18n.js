@@ -16,8 +16,8 @@ const resources = {
         heatmap: "Heatmap"
       },
       welcome: {
-        title: "Welcome to Cosmic Safety",
-        desc: "Select your role to begin. Real-time alerts, digital ID, dashboards and more."
+        title: "Welcome to Emergency Response",
+        desc: "Select your role to begin. High-visibility alerts, digital IDs, and mission-ready dashboards."
       },
       auth: {
         email: "Email",
@@ -64,7 +64,7 @@ const resources = {
   es: {
     translation: {
       nav: { language: "Idioma", login: "Iniciar sesión", signup: "Crear cuenta", logout: "Salir", getStarted: "Comenzar", touristHome: "Inicio Turista", dashboard: "Panel", incidents: "Incidentes", heatmap: "Mapa" },
-      welcome: { title: "Bienvenido a Cosmic Safety", desc: "Seleccione su rol para comenzar. Alertas en tiempo real, ID digital, paneles y más." },
+      welcome: { title: "Bienvenido a Respuesta de Emergencia", desc: "Seleccione su rol. Alertas de alta visibilidad, IDs digitales y paneles operativos." },
       auth: { email: "Correo", password: "Contraseña", role: "Rol", login: "Ingresar", signup: "Crear cuenta", haveAccount: "¿Ya tienes cuenta?", noAccount: "¿No tienes cuenta?", chooseRole: "Elige tu rol" },
       roles: { tourist: "Turista", authority: "Autoridad", family: "Familia" },
       tourist: { myDigitalId: "Mi ID Digital", safetyStatus: "Estado de Seguridad", liveMap: "Mapa en Vivo", alerts: "Alertas", panic: "Pánico", openPanic: "Abrir Pánico", cancel: "Cancelar", submit: "Enviar Pánico", panicTitle: "Confirmar Pánico", panicDesc: "Comparte tu ubicación y una nota para notificar a las autoridades.", note: "Nota (opcional)" },
@@ -75,7 +75,7 @@ const resources = {
   fr: {
     translation: {
       nav: { language: "Langue", login: "Connexion", signup: "Créer un compte", logout: "Déconnexion", getStarted: "Commencer", touristHome: "Accueil Touriste", dashboard: "Tableau de bord", incidents: "Incidents", heatmap: "Carte" },
-      welcome: { title: "Bienvenue à Cosmic Safety", desc: "Sélectionnez votre rôle pour commencer. Alertes en temps réel, ID numérique, tableaux de bord et plus." },
+      welcome: { title: "Bienvenue à Réponse d'Urgence", desc: "Choisissez votre rôle. Alertes haute visibilité, IDs numériques et tableaux de bord opérationnels." },
       auth: { email: "Email", password: "Mot de passe", role: "Rôle", login: "Connexion", signup: "Créer", haveAccount: "Vous avez déjà un compte?", noAccount: "Pas de compte?", chooseRole: "Choisissez votre rôle" },
       roles: { tourist: "Touriste", authority: "Autorité", family: "Famille" },
       tourist: { myDigitalId: "Mon ID Numérique", safetyStatus: "Statut de Sécurité", liveMap: "Carte en direct", alerts: "Alertes", panic: "Panique", openPanic: "Ouvrir Panique", cancel: "Annuler", submit: "Envoyer Panique", panicTitle: "Confirmer Panique", panicDesc: "Partagez votre position et une note pour avertir les autorités.", note: "Note (optionnel)" },

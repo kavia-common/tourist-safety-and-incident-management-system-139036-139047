@@ -62,7 +62,7 @@ function Overview() {
         <div>Avg Safety Score: <strong>{data?.avgSafety ?? '—'}</strong></div>
       </div>
       <div className="card">
-        <div className="card-title">Recent AI Events</div>
+        <div className="card-title">Recent AI Events <span className="badge badge-warning" aria-live="polite">Auto-refresh</span></div>
         <AuthorityEvents limit={5} compact />
       </div>
       <div className="card">
@@ -180,7 +180,7 @@ function Incidents() {
   return (
     <div className="grid cols-2">
       <div className="card">
-        <div className="card-title">Panic Incidents</div>
+        <div className="card-title">Panic Incidents <span className="badge badge-critical">Critical</span></div>
         <div className="grid">
           {(panics || []).map((p, idx) => (
             <div key={idx} className="alert-item">
