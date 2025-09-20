@@ -266,6 +266,9 @@ export default function TouristHome() {
         <div className="card">
           <div className="card-title">{t('tourist.liveMap')}</div>
           <MapPlaceholder lat={location.lat} lng={location.lng} />
+          <div style={{ marginTop: 8 }}>
+            <a className="btn btn-primary" href="/tourist/map">Open Live Map</a>
+          </div>
         </div>
       </div>
       <PanicModal open={panicOpen} onClose={() => setPanicOpen(false)} onSubmit={panic} />

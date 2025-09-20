@@ -13,6 +13,7 @@ import Login from './auth/Login';
 import LoginCosmic from './auth/LoginCosmic';
 import Register from './auth/Register';
 import SeedCard from './components/SeedCard';
+import LiveMap from './components/LiveMap';
 
 const EmergencyTheme = {
   primary: '#0B3B60',     // deep navy
@@ -48,7 +49,10 @@ export function AppShell() {
   }, [theme]);
 
   const routesByRole = useMemo(() => ({
-    tourist: [{ to: '/tourist', label: t('nav.touristHome') }],
+    tourist: [
+      { to: '/tourist', label: t('nav.touristHome') },
+      { to: '/tourist/map', label: t('tourist.liveMap') }
+    ],
     authority: [
       { to: '/authority', label: t('nav.dashboard') },
       { to: '/authority/incidents', label: t('nav.incidents') },
@@ -114,6 +118,7 @@ export function AppShell() {
             <Route path="/register" element={<Register />} />
             <Route path="/login-classic" element={<Login />} />
             <Route path="/tourist/*" element={<RequireRole role="tourist"><TouristHome /></RequireRole>} />
+            <Route path="/tourist/map" element={<RequireRole role="tourist"><LiveMap /></RequireRole>} />
             <Route path="/authority/*" element={<RequireRole role="authority"><AuthorityDashboard /></RequireRole>} />
             <Route path="/family/*" element={<RequireRole role="family"><FamilyHome /></RequireRole>} />
             <Route path="*" element={<Navigate to="/" replace />} />

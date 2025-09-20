@@ -13,7 +13,8 @@ const resources = {
         touristHome: "Tourist Home",
         dashboard: "Dashboard",
         incidents: "Incidents",
-        heatmap: "Heatmap"
+        heatmap: "Heatmap",
+        liveMap: "Live Map"
       },
       welcome: {
         title: "Welcome to Emergency Response",
@@ -63,7 +64,7 @@ const resources = {
   },
   es: {
     translation: {
-      nav: { language: "Idioma", login: "Iniciar sesión", signup: "Crear cuenta", logout: "Salir", getStarted: "Comenzar", touristHome: "Inicio Turista", dashboard: "Panel", incidents: "Incidentes", heatmap: "Mapa" },
+      nav: { language: "Idioma", login: "Iniciar sesión", signup: "Crear cuenta", logout: "Salir", getStarted: "Comenzar", touristHome: "Inicio Turista", dashboard: "Panel", incidents: "Incidentes", heatmap: "Mapa", liveMap: "Mapa en Vivo" },
       welcome: { title: "Bienvenido a Respuesta de Emergencia", desc: "Seleccione su rol. Alertas de alta visibilidad, IDs digitales y paneles operativos." },
       auth: { email: "Correo", password: "Contraseña", role: "Rol", login: "Ingresar", signup: "Crear cuenta", haveAccount: "¿Ya tienes cuenta?", noAccount: "¿No tienes cuenta?", chooseRole: "Elige tu rol" },
       roles: { tourist: "Turista", authority: "Autoridad", family: "Familia" },
@@ -74,7 +75,7 @@ const resources = {
   },
   fr: {
     translation: {
-      nav: { language: "Langue", login: "Connexion", signup: "Créer un compte", logout: "Déconnexion", getStarted: "Commencer", touristHome: "Accueil Touriste", dashboard: "Tableau de bord", incidents: "Incidents", heatmap: "Carte" },
+      nav: { language: "Langue", login: "Connexion", signup: "Créer un compte", logout: "Déconnexion", getStarted: "Commencer", touristHome: "Accueil Touriste", dashboard: "Tableau de bord", incidents: "Incidents", heatmap: "Carte", liveMap: "Carte en direct" },
       welcome: { title: "Bienvenue à Réponse d'Urgence", desc: "Choisissez votre rôle. Alertes haute visibilité, IDs numériques et tableaux de bord opérationnels." },
       auth: { email: "Email", password: "Mot de passe", role: "Rôle", login: "Connexion", signup: "Créer", haveAccount: "Vous avez déjà un compte?", noAccount: "Pas de compte?", chooseRole: "Choisissez votre rôle" },
       roles: { tourist: "Touriste", authority: "Autorité", family: "Famille" },

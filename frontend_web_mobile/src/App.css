@@ -15,6 +15,30 @@
   --shadow-sm: 0 1px 2px rgba(0,0,0,0.3);
   --shadow-md: 0 10px 24px rgba(0,0,0,0.35);
   --radius: 12px;
+
+  /* Live Map Geofencing Design Variables */
+  --bg-canvas: #F7F7F7;
+  --geofence-stroke: #E6B800;
+  --geofence-fill-primary: rgba(235, 211, 128, 0.55);
+  --geofence-inner-stroke: #7AAE55;
+  --geofence-fill-secondary: rgba(159, 207, 131, 0.35);
+
+  --marker-default-fill: #B7442A;
+  --marker-default-stroke: #6B1F11;
+  --marker-dense-fill: #8F2E1C;
+  --marker-selected-stroke: #1A73E8;
+  --marker-selected-halo: rgba(26,115,232,0.25);
+
+  --cluster-bg: #FFD166;
+  --cluster-text: #5A3B00;
+  --cluster-border: #E6B800;
+
+  --cta-bg: #1A73E8;
+  --cta-text: #FFFFFF;
+
+  --control-bg: #FFFFFF;
+  --control-icon: #4A4A4A;
+  --control-shadow: 0 2px 8px rgba(0,0,0,0.15);
 }
 
 html, body, #root {
