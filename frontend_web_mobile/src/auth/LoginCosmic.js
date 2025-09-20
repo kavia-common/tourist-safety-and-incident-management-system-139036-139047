@@ -19,10 +19,27 @@ export default function LoginCosmic() {
   const [form, setForm] = useState({ email: '', password: '', role: 'tourist' });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
+  const [touched, setTouched] = useState({ email: false, password: false });
+
+  const emailInvalid = touched.email && !/^\S+@\S+\.\S+$/.test(form.email);
+  const passwordInvalid = touched.password && form.password.length < 6;
 
   const submit = async (e) => {
     e.preventDefault();
     setErr('');
+
+    // basic validation
+    if (!/^\S+@\S+\.\S+$/.test(form.email)) {
+      setErr('Please enter a valid email address.');
+      setTouched((t0) => ({ ...t0, email: true }));
+      return;
+    }
+    if (form.password.length < 6) {
+      setErr('Password must be at least 6 characters.');
+      setTouched((t0) => ({ ...t0, password: true }));
+      return;
+    }
+
     setLoading(true);
     try {
       await login(form);
@@ -71,28 +88,34 @@ export default function LoginCosmic() {
               <label className="cosmic-label" htmlFor="email">{t('auth.email')}</label>
               <input
                 id="email"
-                className="cosmic-input"
+                className={`cosmic-input ${emailInvalid ? 'cosmic-input--invalid' : ''}`}
                 type="email"
                 autoComplete="email"
                 value={form.email}
                 onChange={(e) => setForm({ ...form, email: e.target.value })}
+                onBlur={() => setTouched((t0) => ({ ...t0, email: true }))}
                 required
                 placeholder="you@example.com"
+                aria-invalid={emailInvalid ? 'true' : 'false'}
               />
+              {emailInvalid && <div className="cosmic-error" role="alert">Enter a valid email.</div>}
             </div>
 
             <div className="cosmic-field">
               <label className="cosmic-label" htmlFor="password">{t('auth.password')}</label>
               <input
                 id="password"
-                className="cosmic-input"
+                className={`cosmic-input ${passwordInvalid ? 'cosmic-input--invalid' : ''}`}
                 type="password"
                 autoComplete="current-password"
                 value={form.password}
                 onChange={(e) => setForm({ ...form, password: e.target.value })}
+                onBlur={() => setTouched((t0) => ({ ...t0, password: true }))}
                 required
                 placeholder="••••••••"
+                aria-invalid={passwordInvalid ? 'true' : 'false'}
               />
+              {passwordInvalid && <div className="cosmic-error" role="alert">Minimum 6 characters.</div>}
             </div>
 
             <div className="cosmic-field">
@@ -240,6 +263,10 @@ const COSMIC_STYLES = `
 .cosmic-input:focus-visible, .cosmic-select:focus-visible {
   outline-color: #60A5FA;
   box-shadow: 0 0 0 4px rgba(96,165,250,0.15);
+}
+.cosmic-input--invalid {
+  border-color: rgba(239,68,68,0.7);
+  box-shadow: 0 0 0 3px rgba(239,68,68,0.15);
 }
 .cosmic-role-group { display: grid; gap: 6px; }
 .cosmic-help { font-size: 12px; color: #94A3B8; }

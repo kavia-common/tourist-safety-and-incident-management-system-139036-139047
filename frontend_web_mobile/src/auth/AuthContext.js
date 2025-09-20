@@ -35,10 +35,14 @@ export function AuthProvider({ children }) {
       setRole(r);
       if (r) localStorage.setItem('role', r); else localStorage.removeItem('role');
     },
-    // Mock login handling: expects backend to issue token separately; for now we set a placeholder token
+    // PUBLIC_INTERFACE
+    // login: demo/stub implementation connected to UI
+    // Validates basic fields; sets a placeholder token and stores role for routing.
     login: async ({ email, password, role: r }) => {
-      // In real flow, call backend auth provider; here we treat signup endpoint as server-provision
-      // and set a demo token to access protected endpoints expecting bearer token
+      if (!email || !password) {
+        throw new Error('Email and password are required');
+      }
+      // In real flow, call backend auth here; we simulate success with a demo token
       const fakeToken = 'demo-token';
       localStorage.setItem('accessToken', fakeToken);
       setUser({ email });
@@ -48,6 +52,7 @@ export function AuthProvider({ children }) {
       }
       return true;
     },
+    // PUBLIC_INTERFACE
     register: async ({ email, password, role: r }) => {
       await Api.signup(fetchJson, { email, password, metadata: { role: r } });
       const fakeToken = 'demo-token';
@@ -59,6 +64,7 @@ export function AuthProvider({ children }) {
       }
       return true;
     },
+    // PUBLIC_INTERFACE
     logout: () => {
       localStorage.removeItem('accessToken');
       localStorage.removeItem('role');
