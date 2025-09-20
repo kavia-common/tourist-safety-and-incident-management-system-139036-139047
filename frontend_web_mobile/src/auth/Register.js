@@ -9,7 +9,7 @@ export default function Register() {
   const { t } = useTranslation();
   const { register } = useAuth();
   const nav = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '', role: 'tourist' });
+  const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
 
@@ -18,10 +18,10 @@ export default function Register() {
     setErr('');
     setLoading(true);
     try {
-      await register(form);
-      if (form.role === 'tourist') nav('/tourist');
-      if (form.role === 'authority') nav('/authority');
-      if (form.role === 'family') nav('/family');
+      const res = await register(form);
+      if (res?.role === 'tourist') nav('/tourist');
+      else if (res?.role === 'authority') nav('/authority');
+      else nav('/');
     } catch (e1) {
       setErr(e1.message || 'Sign up failed');
     } finally {
@@ -40,13 +40,9 @@ export default function Register() {
           <label className="label" style={{ marginTop: 8 }}>{t('auth.password')}</label>
           <input className="input" type="password" value={form.password} onChange={(e) => setForm({ ...form, password: e.target.value })} required />
 
-          <label className="label" style={{ marginTop: 8 }}>{t('auth.chooseRole')}</label>
-          <select className="select" value={form.role} onChange={(e) => setForm({ ...form, role: e.target.value })}>
-            <option value="tourist">{t('roles.tourist')}</option>
-            <option value="authority">{t('roles.authority')}</option>
-            <option value="family">{t('roles.family')}</option>
-          </select>
-          <div className="alert-time" style={{ marginTop: 4 }}>Your role defines which dashboard you will see.</div>
+          <div className="alert-time" style={{ marginTop: 4 }}>
+            New accounts default to the Tourist role.
+          </div>
 
           {err && <div style={{ color: 'var(--color-error)', marginTop: 8 }}>{err}</div>}
 

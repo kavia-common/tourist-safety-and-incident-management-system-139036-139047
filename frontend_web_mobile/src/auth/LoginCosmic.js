@@ -16,7 +16,7 @@ export default function LoginCosmic() {
   const { t } = useTranslation();
   const { login } = useAuth();
   const nav = useNavigate();
-  const [form, setForm] = useState({ email: '', password: '', role: 'tourist' });
+  const [form, setForm] = useState({ email: '', password: '' });
   const [loading, setLoading] = useState(false);
   const [err, setErr] = useState('');
   const [touched, setTouched] = useState({ email: false, password: false });
@@ -120,22 +120,7 @@ export default function LoginCosmic() {
               {passwordInvalid && <div className="cosmic-error" role="alert">Minimum 6 characters.</div>}
             </div>
 
-            <div className="cosmic-field">
-              <label className="cosmic-label" htmlFor="role">{t('auth.chooseRole')}</label>
-              <div className="cosmic-role-group">
-                <select
-                  id="role"
-                  className="cosmic-select"
-                  value={form.role}
-                  onChange={(e) => setForm({ ...form, role: e.target.value })}
-                >
-                  <option value="tourist">{t('roles.tourist')}</option>
-                  <option value="authority">{t('roles.authority')}</option>
-                  <option value="family">{t('roles.family')}</option>
-                </select>
-                <span className="cosmic-help">Demo note: Role is determined by credentials (user/user123 => Tourist, admin/admin123 => Admin).</span>
-              </div>
-            </div>
+            {/* Role selection removed: role is determined by credentials */}
 
             {err && <div className="cosmic-error" role="alert">{err}</div>}
 

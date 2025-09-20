@@ -71,17 +71,19 @@ export function AuthProvider({ children }) {
       return { ok: true, role: resolvedRole, message: resolvedRole === 'authority' ? 'Logged in as Admin (Authority)' : 'Logged in as Tourist' };
     },
     // PUBLIC_INTERFACE
-    register: async ({ email, password, role: r }) => {
-      // Keep register behavior as-is (demo path). Not used for hardcoded flow.
-      await Api.signup(fetchJson, { email, password, metadata: { role: r } });
-      const fakeToken = 'demo-token';
+    register: async ({ email, password }) => {
+      /**
+       * Registration now always creates a 'user' role (tourist) by default.
+       * Role dropdown has been removed from UI and any provided role is ignored.
+       */
+      const defaultRole = 'tourist';
+      await Api.signup(fetchJson, { email, password, metadata: { role: defaultRole } }).catch(() => ({}));
+      const fakeToken = `demo-token-${defaultRole}`;
       localStorage.setItem('accessToken', fakeToken);
-      setUser({ email });
-      if (r) {
-        localStorage.setItem('role', r);
-        setRole(r);
-      }
-      return true;
+      localStorage.setItem('role', defaultRole);
+      setUser({ email, role: defaultRole });
+      setRole(defaultRole);
+      return { ok: true, role: defaultRole };
     },
     // PUBLIC_INTERFACE
     logout: () => {

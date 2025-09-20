@@ -83,7 +83,7 @@ export function AppShell() {
           </select>
           {user ? (
             <div className="user-menu">
-              <span className="user-pill">{user.email || 'User'}</span>
+              <span className="user-pill">{user.email || 'user'}</span>
               <button className="btn btn-secondary" onClick={logout}>{t('nav.logout')}</button>
             </div>
           ) : (
